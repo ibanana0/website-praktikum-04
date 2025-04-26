@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Today's Advice</title>
+
+    <!-- Style -->
+     <link rel="stylesheet" href="style.css">
+
+    <!-- API -->
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+     <!-- Font -->
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="big-red" class="light red big fast"></div>
+    <div id="big-blue" class="light blue big fast"></div>
+    <div id="smaller-red" class="light red smaller medium"></div>
+    <div id="smaller-blue" class="light blue smaller medium"></div>
+    <div id="small-red-1" class="light red small slow"></div>
+    <div id="small-blue-1" class="light blue small slow"></div>
+    <div id="small-red-2" class="light red small slow"></div>
+    <div id="small-blue-2" class="light blue small slow"></div>
+    <div id="smallest-red" class="light red smallest slowest"></div>
+    <div id="smallest-red-1" class="light red smallest slowest"></div>
+    <div id="smallest-blue" class="light blue smallest slowest"></div>
+    
+    <div id="first">
+        <h1>Today's Advice</h1>
+        <div class="button-rainbow" id="roll-now-button">
+            <p id="roll-now-text">Roll Now!</p>
+        </div>
+    </div>
+
+    <div id="advice-container"></div>
+
+    <script>
+        const $retryButton = $("<button>", {
+            class: "button-rainbow",
+            type: "submit",
+            html: "retry"
+            }).css({
+                position: "absolute",
+                top: "135%",
+                border: "2px transparent",
+                transform: "translateX(-50%)",
+                padding: "10px 10px",
+                borderRadius: "8px",
+                fontSize: "2rem",
+                fontWeight: "550",
+                color: "white",
+                width: "fit-content"
+            });
+        $(document).ready(
+            $('#roll-now-button').on("click", function(){
+                $('#roll-now-text').text("Loading your advice...").css({
+                    fontSize: "2rem",
+                    fontWeight: "400"
+                });
+                $('#roll-now-button').css('pointer-events', 'none');
+
+                $.ajax({
+                    method: 'GET',
+                    url: 'https://api.api-ninjas.com/v1/advice',
+                    headers: {
+                        'X-Api-Key' : 'oaQHR+tvNsixPjF1qet2gA==l1uGZRqKNZAj3RSa',
+                    },
+                    dataType: 'json',
+                    success: function(result) {
+                        $('#advice-container').empty();
+                        console.log(result);
+                        const $advice = `
+                            <div class="advice">
+                            <h2>${result.advice}</h2>
+                            </div>
+                        `;
+                        
+                        $("#first").fadeOut(500);
+                        
+                        //animation
+                        $(".fast").animate({
+                            top: '100vh'
+                        }, {
+                            duration: 1000,
+                            easing: "swing",
+                            complete: function() {
+                                $(".fast").remove();
+                            }
+                        });
+                        $(".medium").animate({
+                            top: '100vh'
+                        }, {
+                            duration: 2500,
+                            easing: "swing",
+                            complete: function() {
+                                $(".medium").remove();
+                            }
+                        });
+                        $(".slow").animate({
+                            top: '100vh'
+                        }, {
+                            duration: 3000,
+                            easing: "swing",
+                            complete: function() {
+                                $(".slow").remove();
+                            }
+                        });
+                        $(".slowest").animate({
+                            top: '100vh'
+                        }, {
+                            duration: 3500,
+                            easing: "swing",
+                            complete: function() {
+                                $(".slowest").remove();
+                            }
+                        });
+
+                        setTimeout(function(){
+                            $("#advice-container").append($advice);
+                            $("body").on("click", function(){
+                                $retryButton.hide();
+                                $("#advice-container").append($retryButton);
+                                $retryButton.fadeIn(1000);
+    
+                                $retryButton.on("click", function() {
+                                    location.reload();
+                                })
+                            });
+                        }, 3000);
+                    },
+                    error: function ajaxError(e) {
+                        console.error('Error: ', e.responseText);
+                        alert('Error: terdapat kesalahan 😔');
+                    }
+                });
+            })
+        )
+
+    </script>
+</body>
+</html>

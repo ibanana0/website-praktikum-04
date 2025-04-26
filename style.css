@@ -1,0 +1,176 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    position: relative;
+}
+:root{
+    --gradient: linear-gradient(
+        45deg,
+        #36ABFF,
+        #9FC3FF,
+        #DEA7F0,
+        #E95093
+    );
+}
+body {
+    background-color: black;
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    display: flex;
+    font-family: 'Poppins';
+    color: white;
+    text-align: center;
+}
+h1{
+    font-weight: 550;
+    font-size: 8rem;
+}
+h2{
+    font-weight: 400;
+    font-size: 3rem;
+    font-style: italic;
+}
+#first{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.button-rainbow{
+    color: white;
+    background-image: var(--gradient);
+    background-size: 200%;
+    background-position: center;
+    text-align: center;
+    cursor: pointer;
+
+    animation-name: roll-now-button;
+    animation-duration: 2s;
+    animation-timing-function: ease;
+    animation-iteration-count: infinite;
+    animation-direction:alternate-reverse;
+    transition: ease-in-out;
+    transition-duration: 400ms;
+} 
+#roll-now-button{
+    border: 6px transparent;
+    padding: 20px 20px;
+    border-radius: 24px;
+    width: 50%;
+}
+#roll-now-button:hover{
+    text-shadow: 0 0 10px #FFFFFF;
+    width: 70%;
+}
+@keyframes roll-now-button{
+    0%{
+        background-position: left top;
+    }
+    25%{
+        background-position: center top;
+    }
+    75%{
+        background-position: center bottom;
+    }
+    100%{
+        background-position: right bottom;
+    }
+}
+#roll-now-text{
+    font-size: 5rem;
+    font-weight: 500;
+    border-width: 10px;
+    background-color: black;
+    border-radius: 16px;
+}
+.light{
+    margin: 20px;
+    border-radius: 50%;
+    position: absolute;
+    transition: ease-in-out;
+    z-index: -1;
+}
+.red{
+    background-image: radial-gradient(white 0%, #E95093 60%);
+}
+.blue{
+    background-image: radial-gradient(white 0%, #36ABFF 60%);
+}
+.big{
+    filter: blur(4vw);
+    height: 90vh;
+    width: 90vh;
+}
+.smaller{
+    filter: blur(0.8vw);
+    height: 10vh;
+    width: 10vh;
+    z-index: -2;
+}
+.small{
+    filter: blur(0.5vw);
+    height: 5vh;
+    width: 5vh;
+    z-index: -3;
+}
+.smallest{
+    filter: blur(0.3vw);
+    height: 3vh;
+    width: 3vh;
+    z-index: -4;
+}
+#big-red {
+    top: -30vh;
+    right: -30vw;
+}
+#big-blue {
+    bottom: -30vh;
+    left: -30vw;
+}
+#smaller-red {
+    right: 20vw;
+    bottom: 10vh;
+}
+#smaller-blue {
+    left: 10vw;
+    top: 15vh;
+}
+#small-red-1{
+    right: 5vw;
+    bottom: 10vh;
+}
+#small-blue-1{
+    left: 2vw;
+    top: 10vh;
+}
+#small-red-2{
+    right: 35vw;
+    top: 10vh;
+}
+#small-blue-2{
+    left: 30vw;
+    bottom: 2vh;
+}
+#smallest-red{
+    right: 60vw;
+    top: 5vh;
+}
+#smallest-red-1{
+    right: 35vw;
+    bottom: 35vh;
+}
+#smallest-blue{
+    left: 40vw;
+    bottom: 30vh;
+}
+#advice-container{
+    max-width: 80vw;
+    transition: ease-in-out;
+}
